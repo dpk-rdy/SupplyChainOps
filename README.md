@@ -86,5 +86,4 @@ make pipeline
 ```
 
 Then point Looker Studio / Power BI at `analytics.*` and run the assistant with
-`WAREHOUSE_BACKEND=bigquery`. See `CLAUDE.md` → "Verification status" for what was and wasn't run
-against real cloud infrastructure during the build.
+`WAREHOUSE_BACKEND=bigquery`.
