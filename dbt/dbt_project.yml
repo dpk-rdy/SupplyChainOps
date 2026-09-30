@@ -1,0 +1,60 @@
+name: supplychainops
+version: "1.0.0"
+config-version: 2
+profile: supplychainops
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+analysis-paths: ["analyses"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+require-dbt-version: ">=1.8.0"
+
+vars:
+  # ---- Unit-economics assumptions (Olist publishes no cost data) -------------
+  # Olist's marketplace commission on gross merchandise value (GMV).
+  marketplace_take_rate: 0.20
+  # Card / boleto processing fee as a share of the payment value.
+  payment_processing_rate: 0.03
+  # Share of the freight charged to the customer that is paid out to carriers.
+  # 1.0 = freight is a pure pass-through, the platform earns nothing on it.
+  delivery_cost_ratio: 1.0
+  # Fulfilment / customer-service handling cost per order (BRL).
+  handling_cost_per_order: 3.0
+  # Extra cost per item beyond the first (packing, consolidation), BRL.
+  handling_cost_per_extra_item: 1.0
+  # Calendar range for dim_dates.
+  date_spine_start: "2016-09-01"
+  date_spine_end: "2019-12-31"
+
+models:
+  supplychainops:
+    +materialized: view
+    staging:
+      +schema: staging
+      +materialized: view
+    intermediate:
+      +schema: staging
+      +materialized: view
+    marts:
+      +schema: analytics
+      +materialized: table
+      analytics:
+        forecast:
+          +tags: ["forecast"]
+
+seeds:
+  supplychainops:
+    +schema: analytics
+    brazil_states:
+      +column_types:
+        state_code: varchar
+        state_name: varchar
+        macro_region: varchar
+        capital_city: varchar
+
+tests:
+  +store_failures: false

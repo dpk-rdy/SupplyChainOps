@@ -1,0 +1,20 @@
+version: 2
+seeds:
+- name: brazil_states
+  description: Brazilian federative units with their IBGE macro-region. Used to roll states up to regions.
+  columns:
+  - name: state_code
+    description: Two-letter state code (matches customer_state / seller_state in Olist).
+    tests:
+    - unique
+    - not_null
+  - name: macro_region
+    tests:
+    - accepted_values:
+        arguments:
+          values:
+          - Norte
+          - Nordeste
+          - Centro-Oeste
+          - Sudeste
+          - Sul

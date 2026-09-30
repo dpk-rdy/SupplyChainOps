@@ -1,0 +1,15 @@
+{
+  "version": "0.1",
+  "connections": [
+    {
+      "details": {
+        "protocol": "google-bigquery",
+        "address": {
+          "project": "<GCP_PROJECT>",
+          "dataset": "analytics"
+        }
+      },
+      "mode": "Import"
+    }
+  ]
+}

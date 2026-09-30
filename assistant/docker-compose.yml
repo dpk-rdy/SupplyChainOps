@@ -1,0 +1,26 @@
+# docker compose -f assistant/docker-compose.yml up --build
+# Needs ../.env (copy ../.env.example) and a built DuckDB warehouse in ../data/warehouse.
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: assistant/Dockerfile
+    env_file: ../.env
+    environment:
+      DUCKDB_PATH: /app/data/warehouse/supplychainops.duckdb
+      DBT_MANIFEST_PATH: /app/dbt/target/manifest.json
+    volumes:
+      - ../data/warehouse:/app/data/warehouse:ro
+    ports:
+      - "8000:8000"
+
+  slack:
+    build:
+      context: ..
+      dockerfile: assistant/Dockerfile
+    env_file: ../.env
+    environment:
+      ASSISTANT_API_URL: http://api:8000
+    command: ["python", "-m", "assistant.app.slack_bot"]
+    depends_on:
+      - api

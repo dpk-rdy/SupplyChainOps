@@ -1,0 +1,24 @@
+# Two targets share one set of models:
+#   dev  - DuckDB file on disk (local development and CI, no cloud credentials)
+#   prod - BigQuery (the production warehouse behind Looker Studio / Power BI)
+# Select with `dbt build --target prod`. Run dbt from the repo root with
+# `--project-dir dbt --profiles-dir dbt`, or use `make dbt-build`.
+supplychainops:
+  target: "{{ env_var('DBT_TARGET', 'dev') }}"
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('DUCKDB_PATH', 'data/warehouse/supplychainops.duckdb') }}"
+      schema: analytics
+      threads: 4
+    prod:
+      type: bigquery
+      method: "{{ env_var('BQ_AUTH_METHOD', 'oauth') }}"
+      project: "{{ env_var('GCP_PROJECT') }}"
+      dataset: "{{ env_var('BQ_DATASET_ANALYTICS', 'analytics') }}"
+      location: "{{ env_var('BQ_LOCATION', 'US') }}"
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS', '') }}"
+      threads: 8
+      job_execution_timeout_seconds: 600
+      priority: interactive
+      maximum_bytes_billed: 20000000000

@@ -1,0 +1,206 @@
+version: 2
+models:
+- name: dim_regions
+  description: Brazilian states and their macro-regions (Norte, Nordeste, Centro-Oeste, Sudeste, Sul).
+  columns:
+  - name: state_code
+    description: Two-letter state code.
+    tests:
+    - unique
+    - not_null
+  - name: macro_region
+    description: IBGE macro-region the state belongs to.
+- name: dim_dates
+  description: Calendar table, one row per day from 2016-09-01 to 2019-12-31.
+  columns:
+  - name: date_day
+    tests:
+    - unique
+    - not_null
+  - name: week_start
+    description: Monday of the ISO week containing date_day.
+  - name: iso_day_of_week
+    tests:
+    - between:
+        arguments:
+          min_value: 1
+          max_value: 7
+- name: dim_customers
+  description: One row per order-level customer_id, with state, macro-region and zip-prefix coordinates. Use customer_unique_id
+    to count distinct people.
+  columns:
+  - name: customer_id
+    tests:
+    - unique
+    - not_null
+  - name: customer_unique_id
+    description: Stable identifier of the person; one person can have several customer_ids (one per order).
+    tests:
+    - not_null
+  - name: customer_state
+    tests:
+    - not_null
+  - name: customer_macro_region
+    tests:
+    - not_null
+- name: dim_sellers
+  description: One row per seller with location and lifetime sales activity.
+  columns:
+  - name: seller_id
+    tests:
+    - unique
+    - not_null
+  - name: lifetime_orders
+    description: Distinct orders containing at least one item from the seller.
+    tests:
+    - non_negative
+- name: dim_products
+  description: One row per product with English category name and physical dimensions.
+  columns:
+  - name: product_id
+    tests:
+    - unique
+    - not_null
+  - name: category_name
+    description: English product category (from the Olist translation table); 'unknown' when missing.
+    tests:
+    - not_null
+- name: fct_orders
+  description: 'One row per order (99,441). Delivery timing, service level (on-time flag) and modelled unit economics.
+    Money is in BRL. Cost lines follow the assumptions in dbt_project.yml vars (take rate, payment fee, delivery
+    cost ratio, handling cost), since Olist publishes no costs.
+
+    '
+  tests:
+  - row_count_matches:
+      arguments:
+        compare_model: ref('stg_orders')
+  columns:
+  - name: order_id
+    tests:
+    - unique
+    - not_null
+  - name: customer_state
+    description: Two-letter state of the customer (delivery destination). The 'region' used across the KPI marts.
+    tests:
+    - not_null
+  - name: customer_macro_region
+    description: Macro-region of the delivery destination.
+  - name: seller_state
+    description: State of the primary (first line item) seller.
+  - name: order_status
+    description: Final status in the source (delivered, shipped, canceled, unavailable, invoiced, processing, created,
+      approved).
+    tests:
+    - not_null
+  - name: purchased_at
+    description: Order purchase timestamp.
+    tests:
+    - not_null
+  - name: purchase_date
+    tests:
+    - not_null
+  - name: purchase_week
+    description: Monday of the purchase week.
+  - name: purchase_month
+    description: First day of the purchase month.
+  - name: is_delivered
+    description: True when order_status = 'delivered'.
+  - name: is_canceled
+    description: True when order_status is canceled or unavailable.
+  - name: is_on_time
+    description: True when the order was delivered on or before the estimated delivery date; null when not delivered.
+  - name: delivery_days
+    description: Fractional days from purchase to customer delivery; null when not delivered.
+    tests:
+    - between:
+        arguments:
+          min_value: 0
+          max_value: 250
+  - name: estimated_days
+    description: Fractional days from purchase to the estimated delivery date promised to the customer.
+  - name: delivery_delay_days
+    description: delivered_at minus estimated_delivery_at in days; negative when early.
+  - name: transit_days
+    description: Days from carrier pickup to customer delivery.
+  - name: handling_days
+    description: Days from payment approval to carrier pickup.
+  - name: n_items
+    description: Number of line items in the order.
+    tests:
+    - non_negative
+  - name: gmv
+    description: Gross merchandise value = sum of item prices (BRL), excluding freight.
+    tests:
+    - not_null
+    - non_negative
+  - name: freight_value
+    description: Freight charged to the customer (BRL), summed over items.
+    tests:
+    - not_null
+    - non_negative
+  - name: payment_value
+    description: Total paid across all payment records (BRL).
+  - name: review_score
+    description: Latest review score (1-5) for the order; null if no review.
+  - name: distance_km
+    description: Straight-line distance between customer and primary seller zip prefixes.
+  - name: take_revenue
+    description: Platform commission = gmv * marketplace_take_rate.
+  - name: freight_revenue
+    description: Freight collected from the customer (= freight_value).
+  - name: delivery_cost
+    description: Modelled carrier cost = freight_value * delivery_cost_ratio.
+  - name: payment_fee
+    description: Modelled payment processing fee = payment_value * payment_processing_rate.
+  - name: handling_cost
+    description: Modelled fulfilment handling cost per order (+ per extra item).
+  - name: platform_revenue
+    description: take_revenue + freight_revenue.
+  - name: platform_cost
+    description: delivery_cost + payment_fee + handling_cost.
+  - name: contribution_margin
+    description: platform_revenue - platform_cost, BRL per order. The 'margin per order' KPI.
+    tests:
+    - not_null
+  - name: cost_per_delivery
+    description: delivery_cost for delivered orders; null otherwise. The 'cost per delivery' KPI.
+- name: fct_order_items
+  description: One row per order line item (112,650) with product category, seller and order delivery context.
+  tests:
+  - row_count_matches:
+      arguments:
+        compare_model: ref('stg_order_items')
+  columns:
+  - name: order_item_key
+    tests:
+    - unique
+    - not_null
+  - name: order_id
+    tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('fct_orders')
+          field: order_id
+  - name: product_id
+    tests:
+    - relationships:
+        arguments:
+          to: ref('dim_products')
+          field: product_id
+  - name: seller_id
+    tests:
+    - relationships:
+        arguments:
+          to: ref('dim_sellers')
+          field: seller_id
+  - name: price
+    description: Item price in BRL.
+    tests:
+    - not_null
+    - non_negative
+  - name: freight_value
+    description: Freight charged for this item in BRL.
+  - name: freight_ratio
+    description: freight_value / price.

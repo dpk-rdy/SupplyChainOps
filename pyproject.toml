@@ -1,0 +1,19 @@
+[project]
+name = "supplychainops"
+version = "0.1.0"
+description = "End-to-end operations analytics stack on the Olist e-commerce dataset with a Claude-powered warehouse assistant."
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+extend-exclude = ["dbt/target", "dbt/dbt_packages", ".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["ingestion/tests", "forecasting/tests", "assistant/tests", "dashboard/tests"]
+addopts = "-q"
+filterwarnings = ["ignore::DeprecationWarning"]

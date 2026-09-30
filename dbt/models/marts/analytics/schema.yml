@@ -1,0 +1,184 @@
+version: 2
+models:
+- name: mart_kpi_daily_region
+  description: 'Daily operations KPIs per destination state (grain = date_day x state_code), over non-canceled orders
+    grouped by purchase date. Feeds the KPI dashboard. Service-level metrics use delivered orders only.
+
+    '
+  tests:
+  - dbt_utils_free_unique_combination:
+      arguments:
+        combination:
+        - date_day
+        - state_code
+  columns:
+  - name: date_day
+    description: Purchase date.
+    tests:
+    - not_null
+  - name: state_code
+    description: Customer (destination) state.
+    tests:
+    - not_null
+  - name: macro_region
+    description: Destination macro-region.
+  - name: orders
+    description: Non-canceled orders placed that day.
+    tests:
+    - non_negative
+  - name: on_time_rate
+    description: Share of delivered orders delivered on or before the estimated date (0-1).
+    tests:
+    - between:
+        arguments:
+          min_value: 0
+          max_value: 1
+  - name: avg_delivery_days
+    description: Mean purchase-to-delivery time in days for delivered orders.
+  - name: margin_per_order
+    description: Contribution margin / orders (BRL).
+  - name: cost_per_delivery
+    description: Modelled delivery cost per delivered order (BRL).
+    tests:
+    - non_negative
+  - name: gmv
+    description: Gross merchandise value (BRL).
+    tests:
+    - non_negative
+- name: mart_unit_economics_monthly
+  description: Monthly per-order P&L per destination state (grain = month_start x state_code). Revenue and cost
+    lines, margin per order, cost per delivery, AOV.
+  tests:
+  - dbt_utils_free_unique_combination:
+      arguments:
+        combination:
+        - month_start
+        - state_code
+  columns:
+  - name: month_start
+    tests:
+    - not_null
+  - name: state_code
+    tests:
+    - not_null
+  - name: margin_per_order
+    description: Contribution margin per order in BRL.
+  - name: contribution_margin_pct
+    description: Contribution margin as a share of platform revenue.
+  - name: cost_per_delivery
+    description: Delivery cost per delivered order in BRL.
+  - name: on_time_rate
+    tests:
+    - between:
+        arguments:
+          min_value: 0
+          max_value: 1
+- name: mart_demand_weekly_region
+  description: Weekly order demand per destination state (grain = week_start x state_code). Training data for the
+    demand forecast.
+  tests:
+  - dbt_utils_free_unique_combination:
+      arguments:
+        combination:
+        - week_start
+        - state_code
+  columns:
+  - name: week_start
+    description: Monday of the purchase week.
+    tests:
+    - not_null
+  - name: state_code
+    tests:
+    - not_null
+  - name: orders
+    description: Orders placed in the week (all statuses).
+    tests:
+    - not_null
+    - non_negative
+- name: mart_delivery_time_weekly_region
+  description: Weekly delivery-time statistics per destination state over delivered orders (grain = week_start x
+    state_code). Training data for the delivery-time forecast.
+  tests:
+  - dbt_utils_free_unique_combination:
+      arguments:
+        combination:
+        - week_start
+        - state_code
+  columns:
+  - name: week_start
+    tests:
+    - not_null
+  - name: state_code
+    tests:
+    - not_null
+  - name: avg_delivery_days
+    description: Mean purchase-to-delivery days.
+    tests:
+    - not_null
+    - non_negative
+  - name: median_delivery_days
+    description: Median purchase-to-delivery days.
+  - name: on_time_rate
+    tests:
+    - between:
+        arguments:
+          min_value: 0
+          max_value: 1
+- name: mart_seller_performance
+  description: Seller scorecard (grain = seller_id) with volume, on-time rate, delivery days and review score.
+  columns:
+  - name: seller_id
+    tests:
+    - unique
+    - not_null
+- name: mart_category_monthly
+  description: Monthly product-category performance (grain = month_start x category_name).
+  tests:
+  - dbt_utils_free_unique_combination:
+      arguments:
+        combination:
+        - month_start
+        - category_name
+- name: mart_forecast_vs_actual
+  description: >
+    Every forecast (demand_orders = weekly orders, delivery_days = weekly average delivery days)
+    at state, macro_region and country level, joined to the realised actual. One row per
+    run x series x region x target week x horizon. actual is null for target weeks not yet observed.
+  columns:
+  - name: series
+    description: demand_orders or delivery_days.
+    tests:
+    - accepted_values:
+        arguments:
+          values: [demand_orders, delivery_days]
+  - name: region_level
+    description: state, macro_region or country.
+    tests:
+    - accepted_values:
+        arguments:
+          values: [state, macro_region, country]
+  - name: region_code
+    description: State code, macro-region name, or BR for the national series.
+  - name: horizon_weeks
+    description: Weeks ahead of the forecast origin (1 = next week).
+    tests:
+    - between:
+        arguments:
+          min_value: 1
+          max_value: 52
+  - name: forecast
+    description: Point forecast (orders per week, or average delivery days).
+    tests: [not_null]
+  - name: within_interval
+    description: True when the actual fell inside the 10-90% prediction interval.
+- name: mart_forecast_accuracy_latest
+  description: >
+    Backtest accuracy of every candidate model for the latest forecast run, per series, region
+    and horizon (horizon_weeks = 0 is the all-horizon summary). WAPE = sum|error| / sum|actual|.
+    is_champion marks the model whose forecast was published.
+  columns:
+  - name: wape
+    description: Weighted absolute percentage error over the backtest folds.
+    tests: [not_null, non_negative]
+  - name: is_champion
+    description: True for the model selected for the region.

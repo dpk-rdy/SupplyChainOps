@@ -1,0 +1,41 @@
+version: 2
+
+sources:
+  - name: olist
+    description: >
+      Raw Olist Brazilian e-commerce tables (Kaggle release, 2016-09 to 2018-10), loaded
+      verbatim by `python -m ingestion.load_olist load`. One row per source CSV row.
+    schema: "{{ env_var('RAW_SCHEMA', 'raw') }}"
+    tables:
+      - name: olist_orders
+        description: One row per order (99,441). Status lifecycle and the four delivery timestamps.
+        columns:
+          - name: order_id
+            tests: [unique, not_null]
+      - name: olist_order_items
+        description: One row per item line in an order (112,650). An order can hold several items from several sellers.
+      - name: olist_order_payments
+        description: One row per payment instalment / method used on an order (103,886).
+      - name: olist_order_reviews
+        description: Customer satisfaction surveys. Contains duplicate review_ids; deduplicated in staging.
+      - name: olist_customers
+        description: One row per order-level customer_id; customer_unique_id identifies the person across orders.
+      - name: olist_sellers
+        description: One row per seller (3,095).
+      - name: olist_products
+        description: One row per product (32,951) with category and physical dimensions.
+      - name: olist_geolocation
+        description: ~1M lat/lng points keyed by zip-code prefix. Aggregated to one point per prefix in staging.
+      - name: product_category_name_translation
+        description: Portuguese -> English product category names.
+
+  - name: forecasts
+    description: >
+      Tables written by the forecasting job (`python -m forecasting.run`). Not managed by dbt;
+      only read by the `forecast`-tagged marts.
+    schema: "{{ env_var('FORECAST_SCHEMA', 'forecasts') }}"
+    tables:
+      - name: forecast_demand_weekly_region
+      - name: forecast_delivery_time_weekly_region
+      - name: forecast_accuracy
+      - name: forecast_runs

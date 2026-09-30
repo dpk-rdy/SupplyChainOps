@@ -1,0 +1,36 @@
+version: 2
+models:
+- name: int_order_items_agg
+  description: One row per order with item counts, GMV, freight, weight and the primary seller.
+  columns:
+  - name: order_id
+    tests:
+    - unique
+    - not_null
+  - name: gmv
+    tests:
+    - non_negative
+- name: int_order_payments_agg
+  columns:
+  - name: order_id
+    tests:
+    - unique
+    - not_null
+- name: int_order_reviews_latest
+  columns:
+  - name: order_id
+    tests:
+    - unique
+    - not_null
+- name: int_order_distance
+  columns:
+  - name: order_id
+    tests:
+    - unique
+    - not_null
+  - name: distance_km
+    tests:
+    - between:
+        arguments:
+          min_value: 0
+          max_value: 5000

@@ -1,0 +1,37 @@
+// SupplyChainOps KPI measures. Table aliases: K = mart_kpi_daily_region, U = mart_unit_economics_monthly,
+// F = mart_forecast_vs_actual, A = mart_forecast_accuracy_latest.
+
+Orders = SUM ( mart_kpi_daily_region[orders] )
+Delivered Orders = SUM ( mart_kpi_daily_region[delivered_orders] )
+GMV = SUM ( mart_kpi_daily_region[gmv] )
+
+On-time Rate = DIVIDE ( SUM ( mart_kpi_daily_region[on_time_orders] ), [Delivered Orders] )
+
+Avg Delivery Days =
+DIVIDE (
+    SUMX ( mart_kpi_daily_region, mart_kpi_daily_region[avg_delivery_days] * mart_kpi_daily_region[delivered_orders] ),
+    [Delivered Orders]
+)
+
+Contribution Margin = SUM ( mart_kpi_daily_region[contribution_margin] )
+Margin per Order = DIVIDE ( [Contribution Margin], [Orders] )
+Cost per Delivery = DIVIDE ( SUM ( mart_kpi_daily_region[delivery_cost] ), [Delivered Orders] )
+Average Order Value = DIVIDE ( [GMV], [Orders] )
+Freight to GMV = DIVIDE ( SUM ( mart_kpi_daily_region[freight_revenue] ), [GMV] )
+Contribution Margin % = DIVIDE ( [Contribution Margin], SUM ( mart_kpi_daily_region[platform_revenue] ) )
+
+// Period comparison (requires dim_dates marked as the date table)
+Orders PY = CALCULATE ( [Orders], SAMEPERIODLASTYEAR ( dim_dates[date_day] ) )
+On-time Rate PY = CALCULATE ( [On-time Rate], SAMEPERIODLASTYEAR ( dim_dates[date_day] ) )
+Margin per Order Δ PY = [Margin per Order] - CALCULATE ( [Margin per Order], SAMEPERIODLASTYEAR ( dim_dates[date_day] ) )
+
+// Forecast page
+Forecast Orders = CALCULATE ( SUM ( mart_forecast_vs_actual[forecast] ), mart_forecast_vs_actual[series] = "demand_orders" )
+Actual Orders (fc grain) = CALCULATE ( SUM ( mart_forecast_vs_actual[actual] ), mart_forecast_vs_actual[series] = "demand_orders" )
+Forecast WAPE (realised) =
+DIVIDE (
+    CALCULATE ( SUM ( mart_forecast_vs_actual[abs_error] ), NOT ISBLANK ( mart_forecast_vs_actual[actual] ) ),
+    CALCULATE ( SUM ( mart_forecast_vs_actual[actual] ), NOT ISBLANK ( mart_forecast_vs_actual[actual] ) )
+)
+Champion Backtest WAPE =
+CALCULATE ( AVERAGE ( mart_forecast_accuracy_latest[wape] ), mart_forecast_accuracy_latest[is_champion] = TRUE (), mart_forecast_accuracy_latest[horizon_weeks] = 0 )
