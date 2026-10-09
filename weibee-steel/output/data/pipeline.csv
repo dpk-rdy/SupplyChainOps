@@ -1,0 +1,91 @@
+opportunity_id,project_name,customer_id,project_type,city,state,distance_miles,est_tons,complexity,delivery_method,scope,bid_due_date,fab_start_week,fab_weeks,erection_weeks,lead_source,status
+P-0041,Industrial - Oklahoma City #41,GC-013,industrial,Oklahoma City,OK,29.0,286.0,3,cmar,fab_erect,2026-10-23,2027-02-08,8,9,GC invitation,invited
+P-0066,Healthcare - Joplin #66,GC-011,healthcare,Joplin,MO,220.0,308.0,5,hard_bid,fab_erect,2026-10-25,2027-03-08,6,6,Lead service,lead
+P-0020,Higher education - Wichita #20,GC-012,higher_ed,Wichita,KS,193.0,190.0,2,negotiated,fab_erect,2026-10-26,2027-04-05,6,4,Lead service,invited
+P-0067,Warehouse - Edmond #67,GC-012,warehouse,Edmond,OK,45.0,534.0,1,hard_bid,fab_erect,2026-10-27,2027-03-29,11,10,Architect / engineer,invited
+P-0021,Healthcare - Norman #21,GC-028,healthcare,Norman,OK,13.0,492.0,3,hard_bid,fab_erect,2026-10-30,2027-04-05,13,11,Repeat customer,lead
+P-0046,Multifamily podium - Wichita Falls #46,GC-002,multifamily,Wichita Falls,TX,106.0,176.0,4,cmar,fab_erect,2026-11-28,2027-05-24,4,4,Architect / engineer,invited
+P-0023,Municipal - Norman #23,GC-005,municipal,Norman,OK,13.0,134.0,2,negotiated,fab_erect,2026-12-09,2027-03-08,3,3,Repeat customer,invited
+P-0068,Multifamily podium - Enid #68,GC-013,multifamily,Enid,OK,95.0,394.0,2,hard_bid,fab_only,2026-12-30,2027-03-29,9,7,Architect / engineer,invited
+P-0073,Office - Kansas City #73,GC-023,office,Kansas City,KS,325.0,249.0,3,negotiated,fab_erect,2027-01-01,2027-04-12,8,8,Owner direct,lead
+P-0030,Industrial - Moore #30,GC-013,industrial,Moore,OK,21.0,414.0,3,cmar,fab_erect,2027-01-02,2027-03-15,12,10,Repeat customer,invited
+P-0074,Higher education - Austin #74,GC-010,higher_ed,Austin,TX,332.0,89.0,2,design_build,fab_erect,2027-01-15,2027-06-14,3,4,Lead service,bidding
+P-0072,Office - Oklahoma City #72,GC-018,office,Oklahoma City,OK,31.0,158.0,3,hard_bid,fab_only,2027-02-08,2027-07-26,3,3,GC invitation,lead
+P-0086,K-12 school - Ardmore #86,GC-030,k12,Ardmore,OK,69.0,187.0,1,hard_bid,fab_erect,2027-02-11,2027-07-12,5,5,Repeat customer,lead
+P-0069,Municipal - Kansas City #69,GC-006,municipal,Kansas City,KS,343.0,188.0,2,cmar,fab_erect,2027-02-17,2027-04-26,4,4,GC invitation,lead
+P-0045,Industrial - Oklahoma City #45,GC-023,industrial,Oklahoma City,OK,30.0,1330.0,2,hard_bid,fab_erect,2027-02-18,2027-07-26,30,24,Repeat customer,lead
+P-0084,Office - Broken Arrow #84,GC-023,office,Broken Arrow,OK,118.0,244.0,4,negotiated,fab_erect,2027-02-22,2027-06-21,5,5,Architect / engineer,invited
+P-0082,Office - Tulsa #82,GC-014,office,Tulsa,OK,124.0,119.0,2,cmar,fab_erect,2027-03-19,2027-05-31,4,4,Repeat customer,invited
+P-0060,Sports - Norman #60,GC-022,sports,Norman,OK,13.0,225.0,4,cmar,fab_erect,2027-03-21,2027-07-12,5,5,Owner direct,bidding
+P-0036,Healthcare - Dallas #36,GC-007,healthcare,Dallas,TX,173.0,550.0,3,cmar,fab_erect,2027-03-22,2027-08-16,13,14,Repeat customer,invited
+P-0075,K-12 school - Edmond #75,GC-003,k12,Edmond,OK,45.0,246.0,2,hard_bid,fab_erect,2027-04-15,2027-09-20,7,5,GC invitation,invited
+P-0019,Healthcare - Oklahoma City #19,GC-008,healthcare,Oklahoma City,OK,30.0,272.0,2,cmar,fab_erect,2027-04-16,2027-07-05,7,6,Lead service,invited
+P-0071,Retail - Norman #71,GC-019,retail,Norman,OK,13.0,103.0,1,hard_bid,fab_erect,2027-04-17,2027-07-19,3,4,Repeat customer,invited
+P-0025,K-12 school - Durant #25,GC-030,k12,Durant,OK,102.0,185.0,2,design_build,fab_erect,2027-04-24,2027-10-04,5,4,GC invitation,lead
+P-0006,Retail - Tulsa #6,GC-028,retail,Tulsa,OK,114.0,54.0,3,negotiated,fab_erect,2027-04-27,2027-09-13,2,2,GC invitation,lead
+P-0049,Industrial - Stillwater #49,GC-005,industrial,Stillwater,OK,83.0,338.0,2,cmar,fab_erect,2027-04-29,2027-08-02,8,8,GC invitation,invited
+P-0032,Municipal - Muskogee #32,GC-009,municipal,Muskogee,OK,136.0,145.0,3,negotiated,fab_erect,2027-05-01,2027-10-11,3,3,Repeat customer,invited
+P-0024,Industrial - Stillwater #24,GC-020,industrial,Stillwater,OK,83.0,398.0,1,design_build,fab_erect,2027-05-05,2027-09-27,8,7,Repeat customer,invited
+P-0064,Retail - Norman #64,GC-007,retail,Norman,OK,14.0,154.0,2,hard_bid,fab_erect,2027-05-10,2027-10-18,3,3,Lead service,invited
+P-0016,Office - Norman #16,GC-002,office,Norman,OK,13.0,316.0,2,hard_bid,fab_erect,2027-05-13,2027-11-01,6,7,GC invitation,invited
+P-0040,Multifamily podium - Norman #40,GC-033,multifamily,Norman,OK,12.0,343.0,3,cmar,fab_erect,2027-05-20,2027-09-20,10,7,Repeat customer,invited
+P-0078,Municipal - Tulsa #78,GC-013,municipal,Tulsa,OK,119.0,158.0,4,cmar,fab_erect,2027-05-20,2027-09-27,5,4,Lead service,invited
+P-0014,Church - Oklahoma City #14,GC-036,church,Oklahoma City,OK,32.0,51.0,3,cmar,fab_erect,2027-05-24,2027-08-23,2,2,GC invitation,invited
+P-0033,K-12 school - Joplin #33,GC-009,k12,Joplin,MO,223.0,104.0,3,hard_bid,fab_erect,2027-05-27,2027-09-13,3,3,Lead service,invited
+P-0009,Warehouse - Wichita #9,GC-008,warehouse,Wichita,KS,198.0,288.0,2,hard_bid,fab_erect,2027-06-18,2027-12-06,8,9,GC invitation,invited
+P-0027,Warehouse - Lubbock #27,GC-015,warehouse,Lubbock,TX,293.0,149.0,1,hard_bid,fab_erect,2027-06-19,2027-10-04,5,5,Repeat customer,lead
+P-0090,Church - Joplin #90,GC-002,church,Joplin,MO,221.0,89.0,2,hard_bid,fab_erect,2027-06-27,2027-10-25,3,3,GC invitation,lead
+P-0018,K-12 school - Tulsa #18,GC-030,k12,Tulsa,OK,115.0,145.0,4,cmar,fab_only,2027-07-11,2027-12-20,3,4,GC invitation,invited
+P-0056,Sports - Edmond #56,GC-003,sports,Edmond,OK,46.0,255.0,5,hard_bid,fab_erect,2027-07-11,2027-11-08,8,7,Lead service,lead
+P-0077,Multifamily podium - Muskogee #77,GC-002,multifamily,Muskogee,OK,142.0,255.0,3,hard_bid,fab_only,2027-07-18,2027-11-15,8,6,GC invitation,lead
+P-0088,Municipal - Stillwater #88,GC-020,municipal,Stillwater,OK,82.0,62.0,2,hard_bid,fab_erect,2027-07-20,2027-12-27,2,2,Repeat customer,invited
+P-0085,Sports - Norman #85,GC-012,sports,Norman,OK,12.0,452.0,2,cmar,fab_erect,2027-07-26,2027-11-01,13,10,GC invitation,invited
+P-0057,Office - Tulsa #57,GC-023,office,Tulsa,OK,121.0,136.0,3,negotiated,fab_only,2027-08-01,2027-12-20,4,4,Architect / engineer,lead
+P-0061,Municipal - Tulsa #61,GC-024,municipal,Tulsa,OK,126.0,196.0,2,design_build,fab_erect,2027-08-22,2027-11-29,5,4,Architect / engineer,lead
+P-0081,Warehouse - Oklahoma City #81,GC-030,warehouse,Oklahoma City,OK,30.0,119.0,4,cmar,fab_erect,2027-09-01,2028-01-03,4,3,Repeat customer,lead
+P-0063,Church - Oklahoma City #63,GC-026,church,Oklahoma City,OK,30.0,75.0,1,cmar,fab_erect,2027-09-04,2028-02-21,2,2,GC invitation,bidding
+P-0001,Sports - Moore #1,GC-017,sports,Moore,OK,20.0,544.0,4,cmar,fab_only,2027-09-06,2028-01-31,16,10,Lead service,lead
+P-0043,Sports - Moore #43,GC-023,sports,Moore,OK,20.0,355.0,4,hard_bid,fab_erect,2027-09-07,2028-02-07,10,8,GC invitation,lead
+P-0031,Higher education - Stillwater #31,GC-013,higher_ed,Stillwater,OK,84.0,197.0,5,cmar,fab_erect,2027-09-09,2027-11-29,5,5,GC invitation,bidding
+P-0058,Municipal - Fayetteville #58,GC-021,municipal,Fayetteville,AR,221.0,164.0,3,hard_bid,fab_erect,2027-09-11,2027-12-13,4,4,GC invitation,bidding
+P-0029,Multifamily podium - Oklahoma City #29,GC-033,multifamily,Oklahoma City,OK,30.0,222.0,3,design_build,fab_erect,2027-09-17,2028-02-14,4,4,GC invitation,invited
+P-0008,Municipal - Fort Worth #8,GC-024,municipal,Fort Worth,TX,172.0,87.0,4,hard_bid,fab_erect,2027-09-20,2028-02-21,2,2,Repeat customer,invited
+P-0028,Higher education - Lubbock #28,GC-033,higher_ed,Lubbock,TX,273.0,361.0,3,hard_bid,fab_erect,2027-09-22,2027-12-20,9,9,GC invitation,invited
+P-0034,Multifamily podium - Shawnee #34,GC-010,multifamily,Shawnee,OK,39.0,232.0,4,hard_bid,fab_erect,2027-09-22,2027-12-27,5,5,GC invitation,invited
+P-0026,K-12 school - Tulsa #26,GC-003,k12,Tulsa,OK,120.0,175.0,2,negotiated,fab_erect,2027-09-26,2028-02-14,5,5,Architect / engineer,lead
+P-0051,Healthcare - Norman #51,GC-028,healthcare,Norman,OK,13.0,323.0,4,negotiated,fab_erect,2027-10-02,2028-02-07,8,7,GC invitation,invited
+P-0054,Sports - Sherman #54,GC-022,sports,Sherman,TX,113.0,577.0,3,hard_bid,fab_erect,2027-10-31,2028-04-03,12,10,Lead service,lead
+P-0053,Office - Edmond #53,GC-013,office,Edmond,OK,45.0,250.0,4,cmar,fab_erect,2027-11-21,2028-03-27,6,4,GC invitation,invited
+P-0052,Retail - Ardmore #52,GC-011,retail,Ardmore,OK,66.0,68.0,1,hard_bid,fab_erect,2027-11-24,2028-04-10,2,3,Lead service,invited
+P-0007,K-12 school - Oklahoma City #7,GC-019,k12,Oklahoma City,OK,31.0,172.0,4,hard_bid,fab_erect,2027-11-29,2028-02-14,4,5,Repeat customer,lead
+P-0044,Retail - Wichita #44,GC-008,retail,Wichita,KS,192.0,76.0,2,cmar,fab_erect,2027-12-10,2028-05-01,2,2,Lead service,lead
+P-0013,K-12 school - Broken Arrow #13,GC-036,k12,Broken Arrow,OK,124.0,244.0,2,hard_bid,fab_only,2027-12-17,2028-05-01,6,6,Architect / engineer,lead
+P-0005,Higher education - Little Rock #5,GC-033,higher_ed,Little Rock,AR,297.0,217.0,3,design_build,fab_only,2027-12-20,2028-06-05,4,4,GC invitation,lead
+P-0004,Warehouse - Sherman #4,GC-010,warehouse,Sherman,TX,119.0,422.0,1,hard_bid,fab_erect,2028-02-17,2028-08-14,11,9,Repeat customer,lead
+P-0022,Warehouse - Little Rock #22,GC-021,warehouse,Little Rock,AR,298.0,357.0,2,design_build,fab_erect,2028-02-20,2028-06-05,7,5,Lead service,invited
+P-0012,Warehouse - Tulsa #12,GC-030,warehouse,Tulsa,OK,115.0,839.0,1,cmar,fab_erect,2028-02-22,2028-05-22,19,19,Lead service,lead
+P-0048,Warehouse - Broken Arrow #48,GC-012,warehouse,Broken Arrow,OK,126.0,336.0,1,cmar,fab_only,2028-02-22,2028-06-26,7,5,GC invitation,lead
+P-0039,Office - Tulsa #39,GC-012,office,Tulsa,OK,123.0,179.0,3,hard_bid,fab_erect,2028-03-06,2028-06-26,4,5,Repeat customer,invited
+P-0055,Retail - Tulsa #55,GC-014,retail,Tulsa,OK,120.0,95.0,2,cmar,fab_erect,2028-03-15,2028-05-22,2,2,GC invitation,lead
+P-0038,Warehouse - Shawnee #38,GC-019,warehouse,Shawnee,OK,40.0,216.0,1,hard_bid,fab_erect,2028-03-29,2028-09-25,5,5,GC invitation,lead
+P-0083,Warehouse - Fort Smith #83,GC-025,warehouse,Fort Smith,AR,195.0,711.0,1,hard_bid,fab_erect,2028-04-01,2028-07-24,14,15,Architect / engineer,lead
+P-0050,Hospitality - Dallas #50,GC-007,hospitality,Dallas,TX,166.0,420.0,3,hard_bid,fab_erect,2028-04-03,2028-09-04,12,12,Repeat customer,lead
+P-0015,Healthcare - Oklahoma City #15,GC-006,healthcare,Oklahoma City,OK,29.0,380.0,5,cmar,fab_erect,2028-04-05,2028-08-07,7,7,Architect / engineer,invited
+P-0087,Industrial - Edmond #87,GC-024,industrial,Edmond,OK,43.0,276.0,3,cmar,fab_erect,2028-04-11,2028-10-02,8,8,Owner direct,lead
+P-0011,Industrial - Oklahoma City #11,GC-018,industrial,Oklahoma City,OK,32.0,923.0,3,cmar,fab_only,2028-04-16,2028-08-07,22,19,Repeat customer,lead
+P-0042,K-12 school - Fort Smith #42,GC-003,k12,Fort Smith,AR,179.0,290.0,1,cmar,fab_erect,2028-04-18,2028-09-25,9,8,Architect / engineer,lead
+P-0037,Church - Norman #37,GC-003,church,Norman,OK,13.0,107.0,5,design_build,fab_erect,2028-05-16,2028-08-07,3,3,GC invitation,lead
+P-0062,K-12 school - Amarillo #62,GC-007,k12,Amarillo,TX,248.0,87.0,3,design_build,fab_erect,2028-05-19,2028-08-14,2,3,Lead service,lead
+P-0003,Industrial - Muskogee #3,GC-024,industrial,Muskogee,OK,133.0,494.0,2,design_build,fab_erect,2028-05-20,2028-09-25,14,11,Lead service,lead
+P-0065,Church - Enid #65,GC-036,church,Enid,OK,98.0,41.0,2,cmar,fab_erect,2028-05-29,2028-08-21,2,2,Architect / engineer,lead
+P-0047,Industrial - Fort Worth #47,GC-031,industrial,Fort Worth,TX,176.0,353.0,3,hard_bid,fab_erect,2028-06-06,2028-11-06,7,5,GC invitation,invited
+P-0010,Office - Stillwater #10,GC-001,office,Stillwater,OK,80.0,282.0,3,hard_bid,fab_erect,2028-06-15,2028-10-30,7,7,Architect / engineer,lead
+P-0059,Church - Norman #59,GC-002,church,Norman,OK,12.0,219.0,3,cmar,fab_erect,2028-06-16,2028-11-27,5,4,Owner direct,invited
+P-0079,Warehouse - Oklahoma City #79,GC-030,warehouse,Oklahoma City,OK,29.0,269.0,2,hard_bid,fab_erect,2028-06-17,2028-12-11,5,6,GC invitation,invited
+P-0089,Retail - Oklahoma City #89,GC-020,retail,Oklahoma City,OK,30.0,92.0,2,hard_bid,fab_erect,2028-07-07,2028-12-04,3,3,GC invitation,bidding
+P-0070,Higher education - Fort Worth #70,GC-007,higher_ed,Fort Worth,TX,173.0,506.0,4,design_build,fab_erect,2028-07-19,2028-11-06,9,7,Repeat customer,lead
+P-0035,K-12 school - Broken Arrow #35,GC-021,k12,Broken Arrow,OK,121.0,192.0,1,cmar,fab_erect,2028-07-22,2028-10-02,6,5,Architect / engineer,lead
+P-0017,Sports - Tulsa #17,GC-003,sports,Tulsa,OK,123.0,137.0,4,design_build,fab_erect,2028-08-07,2029-01-08,3,3,Owner direct,lead
+P-0076,Church - Little Rock #76,GC-021,church,Little Rock,AR,328.0,68.0,2,negotiated,fab_erect,2028-08-07,2028-11-06,2,2,Repeat customer,lead
+P-0080,Sports - Denton #80,GC-001,sports,Denton,TX,132.0,303.0,4,hard_bid,fab_only,2028-09-05,2028-11-20,6,4,Repeat customer,lead
+P-0002,Higher education - Enid #2,GC-031,higher_ed,Enid,OK,101.0,228.0,5,design_build,fab_erect,2028-09-13,2028-11-20,7,5,GC invitation,invited

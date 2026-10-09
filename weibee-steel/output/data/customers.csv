@@ -1,0 +1,37 @@
+customer_id,customer_name,hq_city,hq_state,tier,first_contact_date,primary_contact
+GC-001,Crossroads Construction,Austin,TX,regional,2016-04-04,Crossroads preconstruction
+GC-002,Red River Builders,Oklahoma City,OK,regional,2019-04-27,Red preconstruction
+GC-003,Sooner State Contractors,Tulsa,OK,regional,2016-05-06,Sooner preconstruction
+GC-004,Prairie Wind General,Dallas,TX,local,2018-09-10,Prairie preconstruction
+GC-005,Flint Hills Construction,Moore,OK,local,2018-09-20,Flint preconstruction
+GC-006,Arbuckle Builders,Kansas City,KS,local,2017-08-02,Arbuckle preconstruction
+GC-007,Canadian River Construction,Fort Worth,TX,local,2021-10-07,Canadian preconstruction
+GC-008,Timberline GC,Kansas City,KS,regional,2018-08-19,Timberline preconstruction
+GC-009,Cimarron Commercial,Edmond,OK,regional,2019-01-25,Cimarron preconstruction
+GC-010,Ouachita Building Group,Shawnee,OK,regional,2020-09-20,Ouachita preconstruction
+GC-011,Great Plains Constructors,Springfield,MO,national,2021-08-07,Great preconstruction
+GC-012,Heartland Build Co,Tulsa,OK,local,2016-06-07,Heartland preconstruction
+GC-013,Washita Valley Builders,Lawton,OK,local,2018-02-12,Washita preconstruction
+GC-014,Blue Stem Contracting,Shawnee,OK,regional,2019-12-15,Blue preconstruction
+GC-015,Tallgrass Construction,Amarillo,TX,local,2019-07-28,Tallgrass preconstruction
+GC-016,Keystone Commercial Builders,Norman,OK,local,2020-03-09,Keystone preconstruction
+GC-017,North Fork General Contractors,Durant,OK,local,2017-12-26,North preconstruction
+GC-018,Boomer Construction Group,Oklahoma City,OK,local,2017-07-21,Boomer preconstruction
+GC-019,Wagon Trail Builders,Edmond,OK,national,2020-07-11,Wagon preconstruction
+GC-020,Caddo Construction,Oklahoma City,OK,local,2021-01-08,Caddo preconstruction
+GC-021,Ironhorse Contractors,Little Rock,AR,national,2021-12-02,Ironhorse preconstruction
+GC-022,Sandstone General,Sherman,TX,local,2019-05-10,Sandstone preconstruction
+GC-023,Summit Ridge Construction,Norman,OK,national,2018-05-18,Summit preconstruction
+GC-024,Meridian Build Partners,Oklahoma City,OK,regional,2017-12-03,Meridian preconstruction
+GC-025,Longhorn Commercial,Denton,TX,regional,2020-12-17,Longhorn preconstruction
+GC-026,Trinity Basin Builders,Edmond,OK,regional,2019-06-09,Trinity preconstruction
+GC-027,Panhandle Constructors,Lawton,OK,regional,2017-04-06,Panhandle preconstruction
+GC-028,Cross Timbers Contracting,Tulsa,OK,regional,2017-02-23,Cross preconstruction
+GC-029,Verdigris Construction,Oklahoma City,OK,local,2021-09-24,Verdigris preconstruction
+GC-030,Osage Builders,Oklahoma City,OK,regional,2019-11-30,Osage preconstruction
+GC-031,Cedar Creek Commercial,Amarillo,TX,national,2017-03-02,Cedar preconstruction
+GC-032,Mesa Vista Construction,Edmond,OK,local,2019-04-11,Mesa preconstruction
+GC-033,Pioneer Civic Builders,Oklahoma City,OK,local,2018-02-03,Pioneer preconstruction
+GC-034,Lone Elm Construction,Fort Worth,TX,regional,2021-12-12,Lone preconstruction
+GC-035,Cottonwood General Contractors,Durant,OK,national,2017-05-30,Cottonwood preconstruction
+GC-036,Granite Peak Builders,Oklahoma City,OK,regional,2019-07-17,Granite preconstruction
