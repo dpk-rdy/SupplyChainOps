@@ -84,24 +84,24 @@ def headline_tiles(ctx: dict) -> str:
                     f"{ch.fmt_int(ttm[ttm.is_won == 1].est_tons.sum())} tons",
                 ),
                 tile(
-                    "Backlog in the shop",
-                    f"{backlog_tons / C.SHOP_CAPACITY_TONS_PER_WEEK:.0f} wks",
-                    f"{ch.fmt_int(backlog_tons)} tons at {C.SHOP_CAPACITY_TONS_PER_WEEK:.0f} t/wk",
+                    "Won work waiting for the shop",
+                    f"{backlog_tons / C.SHOP_CAPACITY_TONS_PER_WEEK:.0f} weeks",
+                    f"{ch.fmt_int(backlog_tons)} tons at {C.SHOP_CAPACITY_TONS_PER_WEEK:.0f} tons a week",
                 ),
                 tile(
-                    "Projected utilisation, next 52 wks",
+                    "How full the shop looks, next 12 months",
                     ch.fmt_pct(nxt.projected_utilisation.mean()),
-                    "backlog + probability-weighted pipeline",
+                    "won work plus upcoming work counted at its win odds",
                 ),
                 tile(
-                    "Margin slip on completed jobs",
+                    "Margin we estimated but did not keep",
                     f"{allj.margin_slip_pts * 100:.1f} pts",
-                    f"estimated {ch.fmt_pct(allj.est_gross_margin_pct, 1)} → realised {ch.fmt_pct(allj.actual_gross_margin_pct, 1)}",
+                    f"estimated {ch.fmt_pct(allj.est_gross_margin_pct, 1)}, actually earned {ch.fmt_pct(allj.actual_gross_margin_pct, 1)}",
                 ),
                 tile(
-                    "Pipeline recommendation",
-                    f"{len(pursue)} Pursue",
-                    f"{len(sc)} opportunities; {ch.fmt_int(pursue.estimating_hours.sum())} estimating hours to pursue",
+                    "Upcoming projects worth chasing",
+                    f"{len(pursue)} of {len(sc)}",
+                    f"about {ch.fmt_int(pursue.estimating_hours.sum())} estimating hours to bid them all",
                 ),
             ]
         )
@@ -368,8 +368,9 @@ def capacity_section(ctx: dict) -> str:
     )
 
 
-def scorecard_section(ctx: dict) -> str:
+def scorecard_section(ctx: dict, top_n: int | None = None) -> str:
     sc = ctx["scorecard"]
+    ranked = sc.head(top_n) if top_n else sc
     cols = [
         ("rank", "#", ch.fmt_int),
         (
@@ -419,8 +420,8 @@ def scorecard_section(ctx: dict) -> str:
         ],
     )
     return card("Summary", stbl) + card(
-        "Ranked opportunities (next 6–24 months)",
-        table(sc, cols, cls="dense scorecard"),
+        f"Ranked opportunities (next 6–24 months{f', top {top_n} of {len(sc)}' if top_n else ''})",
+        table(ranked, cols, cls="dense scorecard"),
         "EV = win odds × expected revenue × margin we actually realise on that project type, minus estimating cost. EV per estimating hour is ranked against what an hour has returned historically (Pursue ≥ 80 %, Review ≥ 35 %). Shop load = backlog + the rest of the pipeline weighted by its odds + this job in full, averaged over its fabrication window.",
     )
 
@@ -472,6 +473,78 @@ def model_section(ctx: dict) -> str:
     )
 
 
+def glossary() -> str:
+    terms = [
+        (
+            "Hit rate",
+            "Share of decided bids we won. By count: 3 wins out of 10 bids is 30 %. By value: dollars won divided by dollars bid, which tells you whether we win the big ones or the small ones.",
+        ),
+        (
+            "Decided bid",
+            "A bid that was won or lost. Cancelled projects and bids still waiting on an answer are left out so they do not drag the hit rate down.",
+        ),
+        (
+            "Gross margin",
+            "What is left of the contract price after material, shop labour and field labour. Before overhead and profit. 'Estimated' is what the bid assumed; 'realised' is what the job actually earned.",
+        ),
+        (
+            "Margin slip",
+            "Estimated gross margin minus realised gross margin, in percentage points. 5 pts of slip on a $1M job is $50,000 that was in the estimate and not in the bank.",
+        ),
+        (
+            "Price gap",
+            "When we lose on price and the GC tells us the low number: how far above it our bid was, as a percentage of our bid.",
+        ),
+        (
+            "Estimating hours",
+            "Time an estimator spends on a takeoff and a price. The scarce resource: we can only bid so many jobs a month.",
+        ),
+        (
+            "Dollars won per estimating hour",
+            "Value of the work we won divided by all the estimating hours spent, won or lost. The return on the estimating team's time.",
+        ),
+        (
+            "Win odds",
+            "The model's estimate of the chance we win a given bid, from 0 % to 100 %, based on what happened on similar bids in our history.",
+        ),
+        (
+            "Expected value (EV)",
+            "Win odds × expected revenue × the margin we actually realise on that kind of work, minus the cost of estimating it. The margin dollars a bid is worth before we know the outcome.",
+        ),
+        (
+            "EV per estimating hour",
+            "Expected value divided by the hours the estimate will take. The ranking number on the scorecard.",
+        ),
+        ("Backlog", "Won work that still has to go through the shop, in tons."),
+        (
+            "Weighted pipeline",
+            "Upcoming opportunities counted at their win odds: a 400-ton job we have a 25 % chance of winning counts as 100 tons.",
+        ),
+        (
+            "Shop load / utilisation",
+            "Tons scheduled in a week divided by what the shop can fabricate in a week. Above 100 % means overtime, outsourcing or late deliveries.",
+        ),
+        (
+            "Delivery method",
+            "How the project is bought. Hard bid: lowest price wins. CM at risk and design-build: the GC chooses on more than price. Negotiated: we are asked to price it without competition.",
+        ),
+        (
+            "Complexity",
+            "1 to 5. 1 is simple braced frames; 5 is architecturally exposed steel, long spans or heavy moment connections.",
+        ),
+        (
+            "Relationship class",
+            "A first-cut grouping of general contractors: A awards us often and the work earns its margin; B awards us sometimes; C rarely awards us. 'New / thin' means fewer than three bids with them.",
+        ),
+        (
+            "Pursue / Review / Pass",
+            "Pursue: worth the estimating hours, no concerns. Review: worth discussing because something is tight (shop load, distance, margin history). Pass: low odds, no capacity, or the expected value does not pay for the estimate.",
+        ),
+    ]
+    rows = "".join(f"<tr><td><b>{_e(t)}</b></td><td>{_e(d)}</td></tr>" for t, d in terms)
+    return f"<div class='card'><table class='glossary'><tbody>{rows}</tbody></table></div>"
+
+
 # ------------------------------------------------------------------ page
 CSS = """
 :root{--surface:#fcfcfb;--page:#f3f3f0;--ink:#0b0b0b;--ink-2:#52514e;--ink-muted:#898781;--grid:#e1e0d9;--line:#d6d5cd;--good:#0ca30c;--warn:#fab219;--accent:#2a78d6}
@@ -500,6 +573,8 @@ table.dense{font-size:12.5px}table.dense td,table.dense th{padding:5px 6px}.why{
 .findings{padding-left:20px}.findings li{margin-bottom:12px;max-width:980px}.action{display:block;color:var(--ink-2);font-size:14px;margin-top:2px}
 .muted{color:var(--ink-muted)}nav{font-size:13px;color:var(--ink-2);margin-top:10px}nav a{color:var(--accent);text-decoration:none;margin-right:14px}
 .note{background:var(--surface);border:1px dashed var(--line);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--ink-2)}
+.howto{background:var(--surface);border:1px solid var(--accent);border-radius:10px;padding:14px 18px;margin:16px 0}.howto h3{margin:0 0 8px;color:var(--ink)}.howto ol{margin:0;padding-left:20px}.howto li{margin-bottom:4px}.howto p{margin:8px 0 0;font-size:13px;color:var(--ink-2)}
+table.glossary td{white-space:normal;vertical-align:top}table.glossary td:first-child{width:200px}
 """
 
 
@@ -512,8 +587,15 @@ def render(ctx: dict) -> str:
         "<h1>Weibee Steel · Bid intelligence</h1>"
         "<p class='sub'>Where we win, what it actually earns, and which of the next two years' opportunities deserve estimating hours.</p>"
         f"<p class='sub muted' style='font-size:13px'>{_e(meta)}</p>"
-        "<nav><a href='#findings'>Findings</a><a href='#hit'>Hit rate</a><a href='#customers'>Customers</a><a href='#execution'>Estimate vs actual</a><a href='#pricing'>Pricing feedback</a><a href='#capacity'>Capacity</a><a href='#scorecard'>Bid / no-bid</a><a href='#model'>Model card</a></nav>"
+        "<nav><a href='#findings'>Findings</a><a href='#hit'>Hit rate</a><a href='#customers'>Customers</a><a href='#execution'>Estimate vs actual</a><a href='#pricing'>Pricing feedback</a><a href='#capacity'>Capacity</a><a href='#scorecard'>Bid / no-bid</a><a href='#model'>Trusting the odds</a><a href='#glossary'>Glossary</a></nav>"
         "</header>"
+        "<div class='howto'><h3>How to read this page in two minutes</h3><ol>"
+        "<li><b>The six numbers at the top</b> say how the business is doing right now: how often we win, what we won, how full the shop is, and how much margin we keep.</li>"
+        "<li><b>Findings</b> are the seven things the data says, each with a next action. If you read nothing else, read these.</li>"
+        "<li><b>The charts</b> show where the numbers come from. Hover over any bar or line for the detail.</li>"
+        "<li><b>The bid / no-bid scorecard</b> is the decision tool: every upcoming project ranked, with a Pursue / Review / Pass call and the reasons in plain words.</li>"
+        "<li><b>The last section</b> says how much to trust the win odds. Short version: good enough to rank, not good enough to overrule the room on one job.</li>"
+        "</ol><p>Words like <i>hit rate</i>, <i>gross margin</i> and <i>win odds</i> are explained in the <a href='#glossary'>glossary</a> at the bottom.</p></div>"
         "<p class='note'><b>Work sample on synthetic data.</b> Every number here comes from a seeded, generated bid history built to look like a mid-size Oklahoma fabricator-erector. Nothing is Weibee Steel's data. The pipeline, the marts and the scorecard logic are what would run on the real thing; see the README for what the intake would need to capture.</p>"
         + headline_tiles(ctx)
         + section(
