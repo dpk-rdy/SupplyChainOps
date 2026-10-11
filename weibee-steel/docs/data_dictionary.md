@@ -24,7 +24,7 @@ report to work; the rest sharpen it.
 | project_type | ✓ | warehouse, industrial, K-12, higher ed, healthcare, retail, office, church, municipal, sports, hospitality, multifamily podium |
 | city, state, distance_miles | ✓ | road miles from the shop; the model uses it directly |
 | est_tons | ✓ | from the takeoff, or a rough tons-per-square-foot guess at lead stage |
-| complexity | ✓ | 1–5: simple braced frames … AESS / long span / heavy moment connections |
+| complexity | ✓ | 1-5: simple braced frames … AESS / long span / heavy moment connections |
 | delivery_method | ✓ | hard bid, CM at risk, negotiated, design-build |
 | scope | ✓ | fab only / fab + erect |
 | bid_due_date | ✓ | |
@@ -55,7 +55,7 @@ report to work; the rest sharpen it.
 | actual_tons, actual_shop_hours, actual_field_hours, actual_material_cost, actual_direct_cost | ✓ | from job cost |
 | schedule_variance_days, ncr_count, days_to_final_payment | | execution and customer-behaviour signals for the scorecard |
 
-## pipeline (opportunities expected to bid in the next 6–24 months)
+## pipeline (opportunities expected to bid in the next 6-24 months)
 
 Same columns as `opportunities` plus `status` (lead / invited / bidding). No prices yet; the
 scorecard fills in expected revenue from historical price per ton by project type.

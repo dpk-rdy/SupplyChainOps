@@ -1,6 +1,6 @@
 # Findings
 
-**Where the shop fits.** K-12 school, Church / worship, Retail / commercial win 37%–41% of decided bids and give back 3.0 pts or less of estimated margin. Sports / recreation, Hospitality, Multifamily podium win 12%–15% and give back 7.4–10.4 pts. Together the bottom three consumed 29% of estimating hours for 18% of dollars won.
+**Where the shop fits.** K-12 school, Church / worship, Retail / commercial win 37%-41% of decided bids and give back 3.0 pts or less of estimated margin. Sports / recreation, Hospitality, Multifamily podium win 12%-15% and give back 7.4-10.4 pts. Together the bottom three consumed 29% of estimating hours for 18% of dollars won.
 
 → Default the bottom three to Review in the bid/no-bid meeting; bid them only with a relationship GC or a negotiated scope.
 

@@ -20,12 +20,12 @@ def _esc(s: object) -> str:
 
 
 def fmt_pct(v: float, digits: int = 0) -> str:
-    return "–" if v is None or v != v else f"{v * 100:.{digits}f}%"
+    return "-" if v is None or v != v else f"{v * 100:.{digits}f}%"
 
 
 def fmt_money(v: float) -> str:
     if v is None or v != v:
-        return "–"
+        return "-"
     a = abs(v)
     if a >= 1e6:
         return f"${v / 1e6:.1f}M"
@@ -35,11 +35,11 @@ def fmt_money(v: float) -> str:
 
 
 def fmt_int(v: float) -> str:
-    return "–" if v is None or v != v else f"{v:,.0f}"
+    return "-" if v is None or v != v else f"{v:,.0f}"
 
 
 def fmt_pts(v: float) -> str:
-    return "–" if v is None or v != v else f"{v * 100:+.1f} pts"
+    return "-" if v is None or v != v else f"{v * 100:+.1f} pts"
 
 
 # ------------------------------------------------------------------ horizontal bars

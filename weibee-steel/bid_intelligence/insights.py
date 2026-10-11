@@ -35,10 +35,10 @@ def generate(ctx: dict) -> list[dict]:
             {
                 "title": "Where the shop fits",
                 "text": (
-                    f"{', '.join(_label(k) for k in best.index)} win {fmt_pct(best.hit_rate_count.min())}–{fmt_pct(best.hit_rate_count.max())} "
+                    f"{', '.join(_label(k) for k in best.index)} win {fmt_pct(best.hit_rate_count.min())}-{fmt_pct(best.hit_rate_count.max())} "
                     f"of decided bids and give back {best.slip.max() * 100:.1f} pts or less of estimated margin. "
-                    f"{', '.join(_label(k) for k in worst.index)} win {fmt_pct(worst.hit_rate_count.min())}–{fmt_pct(worst.hit_rate_count.max())} "
-                    f"and give back {worst.slip.min() * 100:.1f}–{worst.slip.max() * 100:.1f} pts. "
+                    f"{', '.join(_label(k) for k in worst.index)} win {fmt_pct(worst.hit_rate_count.min())}-{fmt_pct(worst.hit_rate_count.max())} "
+                    f"and give back {worst.slip.min() * 100:.1f}-{worst.slip.max() * 100:.1f} pts. "
                     f"Together the bottom three consumed {fmt_pct(worst.estimating_hours.sum() / t.estimating_hours.sum())} of estimating hours "
                     f"for {fmt_pct(worst.won_value.sum() / t.won_value.sum())} of dollars won."
                 ),

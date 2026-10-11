@@ -420,7 +420,7 @@ def scorecard_section(ctx: dict, top_n: int | None = None) -> str:
         ],
     )
     return card("Summary", stbl) + card(
-        f"Ranked opportunities (next 6–24 months{f', top {top_n} of {len(sc)}' if top_n else ''})",
+        f"Ranked opportunities (next 6-24 months{f', top {top_n} of {len(sc)}' if top_n else ''})",
         table(ranked, cols, cls="dense scorecard"),
         "EV = win odds × expected revenue × margin we actually realise on that project type, minus estimating cost. EV per estimating hour is ranked against what an hour has returned historically (Pursue ≥ 80 %, Review ≥ 35 %). Shop load = backlog + the rest of the pipeline weighted by its odds + this job in full, averaged over its fabrication window.",
     )

@@ -14,22 +14,22 @@ bid results and low-bid numbers we collect.
 
 ## First 90 days
 
-**Weeks 1–4: learn the shop, build the intake.**
+**Weeks 1-4: learn the shop, build the intake.**
 Shadow estimating, PM, QC, shop and field as the posting describes. While doing it, build the
 GC/opportunity database with the fields in `docs/data_dictionary.md`, starting from the last 3 years
 of bid logs and job-cost closes. Backfill `result`, `lost_reason` and `competitor_low_price` by
 calling the GCs we lost to; coverage of that one field is the first KPI I would report.
 
-**Weeks 5–8: get the marts live on real history.**
+**Weeks 5-8: get the marts live on real history.**
 Point `bid_intelligence/sql/` at the real tables (DuckDB on a shared drive is enough to start; the SQL
 ports to anything). Publish the hit-rate, customer and estimate-vs-actual pages first and sit with
 the estimators and PMs to argue with the numbers until the definitions are right: what counts as a
 decided bid, which overhead sits in "direct cost", how a change order is booked.
 
-**Weeks 9–13: structured bid/no-bid.**
+**Weeks 9-13: structured bid/no-bid.**
 Turn on the scorecard for the weekly bid meeting with the recommendation shown *next to* the inputs,
 never alone. Log the room's override and why. Set the estimating-hour budget per quarter and let the
-ranking allocate it. Start the pipeline table for 6–24 months out and review the capacity chart
+ranking allocate it. Start the pipeline table for 6-24 months out and review the capacity chart
 monthly with shop leadership.
 
 ## What changes in the pipeline with real data
