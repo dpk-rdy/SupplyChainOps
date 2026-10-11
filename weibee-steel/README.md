@@ -112,6 +112,7 @@ data that behaves like a real shop's. The first 90 days on the real data are ske
 ## Presenting it
 
 - **Executive deck**, 12 slides with speaker notes, for a live 15-minute walkthrough: [docs/Weibee_Bid_Intelligence_Executive_Overview.pptx](docs/Weibee_Bid_Intelligence_Executive_Overview.pptx)
+- **In-depth deck**, 33 slides with speaker notes, for a 40-minute working session: every section of the report charted, a worked example of the scorecard math, the rules, the model diagnostics, the data intake, a 90-day plan, technology roadmap, risks and monthly KPIs: [docs/Weibee_Bid_Intelligence_In_Depth.pptx](docs/Weibee_Bid_Intelligence_In_Depth.pptx) ([PDF](docs/Weibee_Bid_Intelligence_In_Depth.pdf))
 - **Demo guide** with a timed script, a 5-minute version, likely questions with short answers, and what to do if screen share fails: [docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md)
 
 ## Tableau version
