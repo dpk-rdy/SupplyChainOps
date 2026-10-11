@@ -57,6 +57,7 @@ Module responsibilities:
 | `insights.py` | 190 | Findings sentences computed from the marts |
 | `charts.py` | 300 | Inline-SVG bar, dumbbell, histogram, line, stacked-area, calibration |
 | `report.py` | 450 | Page assembly, tables, tiles, glossary, CSS with light and dark tokens |
+| `tableau_export.py` | 230 | Tableau data layer: labelled, denormalised tables to Excel, CSV and an optional `.hyper` extract |
 | `__main__.py` | 100 | CLI: `python -m bid_intelligence run --seed N --out DIR --db FILE` |
 
 Dependencies: `duckdb`, `pandas`, `numpy`. Dev: `pytest`, `ruff`. Python 3.11+.
@@ -280,6 +281,16 @@ glossary. CSS uses design tokens with light and dark variants.
 `charts.py` renders SVG strings with no JavaScript. Palette hues are fixed to entities (estimate blue,
 actual orange, backlog blue, pipeline amber, status colours reserved). Every mark has a `<title>`
 tooltip; charts have a legend when there is more than one series and never a dual axis.
+
+### Tableau data layer
+
+`tableau_export.write()` runs at the end of every `run` and produces `output/tableau/`: a five-sheet
+Excel workbook (Bids and Jobs, Customers, Pipeline Scorecard, Capacity Weekly, Capacity Long), the
+same tables as CSV, and, when `tableauhyperapi` is importable, a single `.hyper` extract with one
+table per sheet. Tables are denormalised with friendly headers and labels instead of keys, and carry
+pre-computed numerator and denominator columns (`Won`, `Decided`, `Won Value`, `Bid Value if
+Decided`) so every Tableau calculated field is a sum over a sum. The dashboard recipe is
+`docs/TABLEAU_GUIDE.md`.
 
 ## 9. From synthetic to production data
 

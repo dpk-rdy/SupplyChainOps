@@ -114,6 +114,14 @@ data that behaves like a real shop's. The first 90 days on the real data are ske
 - **Executive deck**, 12 slides with speaker notes, for a live 15-minute walkthrough: [docs/Weibee_Bid_Intelligence_Executive_Overview.pptx](docs/Weibee_Bid_Intelligence_Executive_Overview.pptx)
 - **Demo guide** with a timed script, a 5-minute version, likely questions with short answers, and what to do if screen share fails: [docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md)
 
+## Tableau version
+
+`make run` also writes a Tableau-ready data layer to `output/tableau/`: an Excel workbook with five
+sheets, the same tables as CSV, and a `.hyper` extract. [docs/TABLEAU_GUIDE.md](docs/TABLEAU_GUIDE.md)
+is the build recipe for three dashboards (the business at a glance, where we win and what it earns,
+bid / no-bid) with every calculated field and worksheet spelled out, about 45 minutes in Tableau
+Desktop or Tableau Public.
+
 ## For the technical reader
 
 The pipeline is Python and DuckDB, about 3,000 lines including SQL and tests, runs in a second and has 23 tests.

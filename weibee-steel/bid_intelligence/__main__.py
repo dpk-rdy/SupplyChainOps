@@ -13,7 +13,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from bid_intelligence import insights, report, scorecard, synth
+from bid_intelligence import insights, report, scorecard, synth, tableau_export
 from bid_intelligence import warehouse as W
 from bid_intelligence import win_model as M
 
@@ -98,6 +98,8 @@ def run(
         + "\n".join(f"**{i['title']}.** {i['text']}\n\n→ {i['action']}\n" for i in ctx["insights"])
     )
     log(f"report: {out / 'bid_intelligence_report.html'} ({len(html) / 1024:.0f} kB)")
+    written = tableau_export.write(con, sc, out / "tableau")
+    log(f"tableau data layer: {', '.join(p.name for p in written.values())}")
     con.close()
     return ctx
 

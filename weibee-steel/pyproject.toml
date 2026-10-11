@@ -3,9 +3,10 @@ name = "weibee-bid-intelligence"
 version = "0.1.0"
 description = "Bid intelligence work sample for a structural-steel fabricator: history -> DuckDB marts -> win model -> bid/no-bid scorecard -> report."
 requires-python = ">=3.11"
-dependencies = ["duckdb>=1.1", "pandas>=2.2", "numpy>=1.26"]
+dependencies = ["duckdb>=1.1", "pandas>=2.2", "numpy>=1.26", "openpyxl>=3.1"]
 
 [project.optional-dependencies]
+tableau = ["tableauhyperapi"]
 dev = ["pytest>=8", "ruff>=0.5"]
 
 [tool.ruff]
