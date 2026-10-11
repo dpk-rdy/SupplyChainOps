@@ -116,9 +116,10 @@ data that behaves like a real shop's. The first 90 days on the real data are ske
 
 ## For the technical reader
 
-The pipeline is Python and DuckDB, about 1,500 lines, runs in a second and has 23 tests.
-[docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md) covers the marts, the model, the expected-value
-arithmetic and how to run it.
+The pipeline is Python and DuckDB, about 3,000 lines including SQL and tests, runs in a second and has 23 tests.
+
+- [docs/TECHNICAL_DESIGN.md](docs/TECHNICAL_DESIGN.md) ([PDF](docs/TECHNICAL_DESIGN.pdf)): architecture, data model, the generator's planted structure, every mart's definitions, the win model and its evaluation, the expected-value and capacity math, the recommendation rules, testing, and what changes on production data.
+- [docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md): the shorter run-and-read guide.
 
 ```bash
 make venv && . .venv/bin/activate && make run     # writes output/bid_intelligence_report.html

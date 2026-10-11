@@ -1,5 +1,7 @@
 # How it works (technical notes)
 
+The full design document is [TECHNICAL_DESIGN.md](TECHNICAL_DESIGN.md); this is the shorter run-and-read version.
+
 A small, complete **data-and-decisions pipeline** for a structural-steel fabricator and erector, built
 around the questions in Weibee Steel's Business Development Associate posting: bid hit rates, customer
 and project-type performance, pricing feedback, estimated-versus-actual margins, a structured
