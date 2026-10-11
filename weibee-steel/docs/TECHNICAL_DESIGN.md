@@ -23,15 +23,25 @@ the real one arrives.
 ## 2. Architecture
 
 ```
- synth.py                    warehouse.py + sql/                 win_model.py          scorecard.py
- seeded generator  ───►  raw.* tables (DuckDB)  ───►  analytics.fct_* / mart_*  ───►  features, fit,  ───►  EV, capacity,
- customers, opps,         load_raw()                 10_ .. 80_*.sql (base)          out-of-time eval      Pursue/Review/Pass
- bids, jobs, pipeline,                                                                      │                      │
- capacity                                                                                   └───────┬──────────────┘
-                                                                                                    ▼
-                                                                          analytics.pipeline_scorecard ──► 90_mart_capacity_weekly.sql
-                                                                                                    │
-                                                                 insights.py (computed findings) ◄──┘──► report.py + charts.py (HTML)
+synth.py            seeded generator: customers, opportunities, bids,
+    │               jobs, pipeline, capacity
+    ▼
+warehouse.py        load_raw() -> raw.* tables in DuckDB
+    │               build_marts("base") -> sql/10_ .. 80_*.sql
+    ▼
+analytics.fct_bids, fct_jobs, mart_*
+    │
+    ├──► win_model.py     features -> ridge logistic fit -> out-of-time eval
+    │         │
+    ▼         ▼
+scorecard.py        p_win, expected value, capacity check, Pursue/Review/Pass
+    │               -> analytics.pipeline_scorecard
+    ▼
+warehouse.py        build_marts("final") -> sql/90_mart_capacity_weekly.sql
+    │
+    ├──► insights.py      findings computed from the marts
+    ▼
+report.py + charts.py   one self-contained HTML page (inline SVG)
 ```
 
 Module responsibilities:
@@ -68,19 +78,29 @@ Dependencies: `duckdb`, `pandas`, `numpy`. Dev: `pytest`, `ruff`. Python 3.11+.
 Five raw tables. The full field list with core/optional flags is in `data_dictionary.md`.
 
 ```
-customers (36)        opportunities (440)        bids (413)              jobs (107)             pipeline (90)
-customer_id PK  ◄──┐  opportunity_id PK   ◄──┐   bid_id PK               job_id PK              opportunity_id PK (P-xxxx)
-customer_name      └─ customer_id FK         ├── opportunity_id FK ◄──── opportunity_id FK       customer_id FK
-hq_city, hq_state     project_type            │   bid_date, estimator     fab_start/end_week     project_type, city, state
-tier                  city, state, distance   │   estimating_hours        erection_end_week      distance_miles, est_tons
-first_contact_date    est_tons, complexity    │   est_* cost build-up     status                 complexity, delivery_method
-                      delivery_method, scope  │   markup_pct, bid_price   actual_* costs/hours   scope, bid_due_date
-                      bid_due_date            │   num_bidders             change_orders_*        fab_start_week, fab_weeks
-                      fab_start_week,         │   result, result_date     final_revenue          status (lead/invited/bidding)
-                      fab_weeks               │   lost_reason             schedule_variance_days lead_source
-                      decision, no_bid_reason │   competitor_low_price    ncr_count
-                                              │                          days_to_final_payment
-capacity (weekly): week_start, capacity_tons  └─ one bid per bid opportunity; no_bid opportunities have none
+customers (36)       customer_id PK, customer_name, hq_city, hq_state,
+                     tier, first_contact_date
+        ▲
+        │ customer_id
+opportunities (440)  opportunity_id PK, customer_id FK, project_type,
+                     city, state, distance_miles, est_tons, complexity,
+                     delivery_method, scope, bid_due_date, fab_start_week,
+                     fab_weeks, decision, no_bid_reason
+        ▲
+        │ opportunity_id (one bid per bid opportunity; no_bid rows have none)
+bids (413)           bid_id PK, opportunity_id FK, bid_date, estimator,
+                     estimating_hours, est_* cost build-up, markup_pct,
+                     bid_price, num_bidders, result, result_date,
+                     lost_reason, competitor_low_price
+        ▲
+        │ opportunity_id (won bids only)
+jobs (107)           job_id PK, opportunity_id FK, fab/erection weeks,
+                     status, actual_* costs and hours, change_orders_*,
+                     final_revenue, schedule_variance_days, ncr_count,
+                     days_to_final_payment
+
+pipeline (90)        opportunity schema (P-xxxx ids) + status; no bid yet
+capacity (weekly)    week_start, capacity_tons
 ```
 
 Grain rules that matter downstream:
