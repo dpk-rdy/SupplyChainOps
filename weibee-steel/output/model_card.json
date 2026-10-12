@@ -1,0 +1,203 @@
+{
+  "diagnostics": {
+    "cutoff": "2025-07-01",
+    "train": {
+      "n": 290,
+      "base_rate": 0.2689655172413793,
+      "auc": 0.8029148524431543,
+      "brier": 0.15097778286551067,
+      "brier_baseline": 0.1966230677764566,
+      "log_loss": 0.4651605897214546,
+      "log_loss_baseline": 0.5822272012830895,
+      "calibration": [
+        {
+          "bin": 1,
+          "bids": 58,
+          "predicted": 0.04597408021893987,
+          "observed": 0.05172413793103448
+        },
+        {
+          "bin": 2,
+          "bids": 58,
+          "predicted": 0.12536809029272666,
+          "observed": 0.10344827586206896
+        },
+        {
+          "bin": 3,
+          "bids": 58,
+          "predicted": 0.2198948147475261,
+          "observed": 0.15517241379310345
+        },
+        {
+          "bin": 4,
+          "bids": 58,
+          "predicted": 0.3371545715926281,
+          "observed": 0.39655172413793105
+        },
+        {
+          "bin": 5,
+          "bids": 58,
+          "predicted": 0.6164360293550758,
+          "observed": 0.6379310344827587
+        }
+      ]
+    },
+    "test": {
+      "n": 100,
+      "base_rate": 0.29,
+      "auc": 0.7464788732394366,
+      "brier": 0.18171554326764586,
+      "brier_baseline": 0.2063424494649227,
+      "log_loss": 0.5366683254363758,
+      "log_loss_baseline": 0.6032591061739777,
+      "calibration": [
+        {
+          "bin": 1,
+          "bids": 20,
+          "predicted": 0.032585865239280934,
+          "observed": 0.0
+        },
+        {
+          "bin": 2,
+          "bids": 20,
+          "predicted": 0.09431269911784715,
+          "observed": 0.25
+        },
+        {
+          "bin": 3,
+          "bids": 20,
+          "predicted": 0.19871071025476308,
+          "observed": 0.2
+        },
+        {
+          "bin": 4,
+          "bids": 20,
+          "predicted": 0.3329539973565118,
+          "observed": 0.5
+        },
+        {
+          "bin": 5,
+          "bids": 20,
+          "predicted": 0.5937098312074076,
+          "observed": 0.5
+        }
+      ]
+    },
+    "base_rate_all": 0.2743589743589744,
+    "l2": 1.0,
+    "features": [
+      "log_tons",
+      "distance_100mi",
+      "complexity",
+      "markup_pct_x10",
+      "num_bidders",
+      "gc_prior_hit_rate",
+      "log1p_gc_prior_bids",
+      "fab_and_erect",
+      "method=cmar",
+      "method=negotiated",
+      "method=design_build",
+      "type=industrial",
+      "type=k12",
+      "type=church",
+      "type=retail",
+      "type=municipal",
+      "type=higher_ed",
+      "type=office",
+      "type=sports",
+      "type=hospitality",
+      "type=multifamily",
+      "type=healthcare"
+    ]
+  },
+  "coefficients": [
+    {
+      "feature": "num_bidders",
+      "coef_std": -0.6185653622532187
+    },
+    {
+      "feature": "distance_100mi",
+      "coef_std": -0.5008210279672838
+    },
+    {
+      "feature": "markup_pct_x10",
+      "coef_std": -0.49918504285649556
+    },
+    {
+      "feature": "complexity",
+      "coef_std": -0.37719116326460883
+    },
+    {
+      "feature": "method=negotiated",
+      "coef_std": 0.3175799355565865
+    },
+    {
+      "feature": "type=multifamily",
+      "coef_std": -0.2721641651348559
+    },
+    {
+      "feature": "log_tons",
+      "coef_std": -0.23396808165891703
+    },
+    {
+      "feature": "type=higher_ed",
+      "coef_std": -0.19306283266261068
+    },
+    {
+      "feature": "fab_and_erect",
+      "coef_std": -0.169170607620435
+    },
+    {
+      "feature": "type=office",
+      "coef_std": -0.1635084013819311
+    },
+    {
+      "feature": "type=hospitality",
+      "coef_std": -0.16178180801986333
+    },
+    {
+      "feature": "type=municipal",
+      "coef_std": 0.16130216166037675
+    },
+    {
+      "feature": "type=industrial",
+      "coef_std": 0.1539399550481805
+    },
+    {
+      "feature": "log1p_gc_prior_bids",
+      "coef_std": 0.11628318341432738
+    },
+    {
+      "feature": "type=sports",
+      "coef_std": -0.10577684018606513
+    },
+    {
+      "feature": "gc_prior_hit_rate",
+      "coef_std": 0.09129163836281583
+    },
+    {
+      "feature": "type=retail",
+      "coef_std": -0.06599680510435582
+    },
+    {
+      "feature": "type=healthcare",
+      "coef_std": -0.04954869911625321
+    },
+    {
+      "feature": "type=k12",
+      "coef_std": 0.04193183116236783
+    },
+    {
+      "feature": "method=cmar",
+      "coef_std": 0.022011657704783066
+    },
+    {
+      "feature": "type=church",
+      "coef_std": -0.01044318443803875
+    },
+    {
+      "feature": "method=design_build",
+      "coef_std": 0.005430394031536781
+    }
+  ]
+}

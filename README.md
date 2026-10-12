@@ -87,3 +87,11 @@ make pipeline
 
 Then point Looker Studio / Power BI at `analytics.*` and run the assistant with
 `WAREHOUSE_BACKEND=bigquery`.
+
+## Work sample: Weibee Steel bid intelligence (`weibee-steel/`)
+
+A self-contained data-and-decisions pipeline for a structural-steel fabricator, built as a work sample
+for a Business Development role: synthetic bid history → DuckDB marts → win-probability model →
+bid/no-bid scorecard → one-page HTML report. Own README, tests and Makefile in
+[`weibee-steel/`](weibee-steel/); open
+[`weibee-steel/output/bid_intelligence_report.html`](weibee-steel/output/bid_intelligence_report.html).
